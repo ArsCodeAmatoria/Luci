@@ -1,5 +1,9 @@
 # Luci: AI-Powered Call Assistant
 
+<p align="center">
+  <img src="public/images/luci-logo.png" alt="Luci Logo" width="200" />
+</p>
+
 [![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
 [![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)

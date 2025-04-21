@@ -1,0 +1,15 @@
+{
+  "name": "@luci/common",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.0",
+    "typescript": "^5.0.4"
+  }
+} 
