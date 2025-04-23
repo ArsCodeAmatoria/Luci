@@ -5,6 +5,8 @@
 </p>
 
 [![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
@@ -24,7 +26,9 @@ Luci is a smart mobile call assistant that screens incoming calls, detects spam,
 
 ## Tech Stack
 
-- **Frontend**: React Native with Expo and NativeWind (Tailwind for RN)
+- **Frontend**: 
+  - Mobile: React Native with Expo and NativeWind (Tailwind for RN)
+  - Web: Next.js with Tailwind CSS
 - **Backend**: Rust (Axum + Tokio)
 - **AI**: ElevenLabs (TTS), Whisper (STT), OpenAI GPT-4o (NLP)
 - **Voice API**: Twilio/Telnyx Programmable Voice
@@ -37,6 +41,7 @@ Luci is a smart mobile call assistant that screens incoming calls, detects spam,
 luci/
 ├── apps/
 │   ├── mobile/        # React Native Expo app
+│   ├── web/           # Next.js web application
 │   └── backend/       # Rust Axum API
 ├── packages/
 │   ├── voice/         # Shared voice processing modules
