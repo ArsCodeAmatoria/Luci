@@ -105,7 +105,7 @@ export default function LandingPage() {
     setInitialized(true);
   }, []);
 
-  // Typing effect
+  // Typing effect with loop
   useEffect(() => {
     if (!initialized) return;
 
@@ -113,6 +113,7 @@ export default function LandingPage() {
     const title = "A CONSCIOUS COLLAPSE ENGINE BUILT FROM FIRST PRINCIPLES";
 
     const timeouts: NodeJS.Timeout[] = [];
+    let loopInterval: NodeJS.Timeout;
 
     const typeText = (text: string, setter: (value: string) => void, startDelay: number, onComplete?: () => void) => {
       text.split('').forEach((char, index) => {
@@ -126,15 +127,44 @@ export default function LandingPage() {
       });
     };
 
-    // Start typing subtitle after 1 second
-    const startTimeout = setTimeout(() => {
+    const clearText = (setter: (value: string) => void, delay: number, onComplete?: () => void) => {
+      const timeout = setTimeout(() => {
+        setter("");
+        if (onComplete) {
+          setTimeout(onComplete, 200);
+        }
+      }, delay);
+      timeouts.push(timeout);
+    };
+
+    const runTypingSequence = () => {
+      // Clear any existing timeouts
+      timeouts.forEach(timeout => clearTimeout(timeout));
+      timeouts.length = 0;
+
+      // Reset typing phase
+      setTypingPhase(0);
+
+      // Start typing subtitle
       typeText(subtitle, setTypedSubtitle, 0, () => {
         setTypingPhase(1);
         // Start typing title
-        typeText(title, setTypedTitle, 0);
+        typeText(title, setTypedTitle, 0, () => {
+          // Wait 3 seconds, then clear text and restart
+          setTimeout(() => {
+            clearText(setTypedTitle, 0, () => {
+              clearText(setTypedSubtitle, 0, () => {
+                // Wait 1 second before restarting
+                setTimeout(runTypingSequence, 1000);
+              });
+            });
+          }, 3000);
+        });
       });
-    }, 1000);
+    };
 
+    // Start the first sequence after 1 second
+    const startTimeout = setTimeout(runTypingSequence, 1000);
     timeouts.push(startTimeout);
 
     // Blinking cursor effect
@@ -424,6 +454,83 @@ export default function LandingPage() {
         .hover\\:shadow-glow:hover {
           box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 15px rgba(139, 92, 246, 0.3);
         }
+        
+        .matrix-rain-container {
+          pointer-events: none;
+        }
+        
+        .matrix-column {
+          position: absolute;
+          top: 0;
+          display: flex;
+          flex-direction: column;
+          animation: matrixRain 12s linear infinite;
+          color: #00ff00;
+        }
+        
+        .matrix-column:nth-child(1) { animation-delay: 0s; }
+        .matrix-column:nth-child(2) { animation-delay: -2s; }
+        .matrix-column:nth-child(3) { animation-delay: -4s; }
+        .matrix-column:nth-child(4) { animation-delay: -6s; }
+        .matrix-column:nth-child(5) { animation-delay: -8s; }
+        .matrix-column:nth-child(6) { animation-delay: -10s; }
+        .matrix-column:nth-child(7) { animation-delay: -1s; }
+        .matrix-column:nth-child(8) { animation-delay: -3s; }
+        
+        .matrix-char {
+          display: block;
+          line-height: 1;
+          margin-bottom: 2px;
+          font-size: 10px;
+          transition: opacity 0.1s;
+        }
+        
+        .matrix-column .matrix-char:nth-child(1) { 
+          opacity: 1; 
+          color: #ffffff;
+          text-shadow: 0 0 8px #00ff00;
+        }
+        .matrix-column .matrix-char:nth-child(2) { opacity: 0.95; color: #ccffcc; }
+        .matrix-column .matrix-char:nth-child(3) { opacity: 0.9; color: #99ff99; }
+        .matrix-column .matrix-char:nth-child(4) { opacity: 0.85; color: #66ff66; }
+        .matrix-column .matrix-char:nth-child(5) { opacity: 0.8; color: #33ff33; }
+        .matrix-column .matrix-char:nth-child(6) { opacity: 0.75; }
+        .matrix-column .matrix-char:nth-child(7) { opacity: 0.7; }
+        .matrix-column .matrix-char:nth-child(8) { opacity: 0.65; }
+        .matrix-column .matrix-char:nth-child(9) { opacity: 0.6; }
+        .matrix-column .matrix-char:nth-child(10) { opacity: 0.55; }
+        .matrix-column .matrix-char:nth-child(11) { opacity: 0.5; }
+        .matrix-column .matrix-char:nth-child(12) { opacity: 0.47; }
+        .matrix-column .matrix-char:nth-child(13) { opacity: 0.44; }
+        .matrix-column .matrix-char:nth-child(14) { opacity: 0.41; }
+        .matrix-column .matrix-char:nth-child(15) { opacity: 0.38; }
+        .matrix-column .matrix-char:nth-child(16) { opacity: 0.35; }
+        .matrix-column .matrix-char:nth-child(17) { opacity: 0.32; }
+        .matrix-column .matrix-char:nth-child(18) { opacity: 0.29; }
+        .matrix-column .matrix-char:nth-child(19) { opacity: 0.26; }
+        .matrix-column .matrix-char:nth-child(20) { opacity: 0.23; }
+        .matrix-column .matrix-char:nth-child(n+21) { opacity: 0.45; }
+        .matrix-column .matrix-char:nth-child(n+25) { opacity: 0.4; }
+        .matrix-column .matrix-char:nth-child(n+30) { opacity: 0.35; }
+        .matrix-column .matrix-char:nth-child(n+35) { opacity: 0.3; }
+        .matrix-column .matrix-char:nth-child(n+40) { opacity: 0.27; }
+        .matrix-column .matrix-char:nth-child(n+45) { opacity: 0.24; }
+        .matrix-column .matrix-char:nth-child(n+50) { opacity: 0.21; }
+        .matrix-column .matrix-char:nth-child(n+55) { opacity: 0.18; }
+        .matrix-column .matrix-char:nth-child(n+60) { opacity: 0.15; }
+        .matrix-column .matrix-char:nth-child(n+65) { opacity: 0.12; }
+        .matrix-column .matrix-char:nth-child(n+70) { opacity: 0.1; }
+        .matrix-column .matrix-char:nth-child(n+75) { opacity: 0.08; }
+        .matrix-column .matrix-char:nth-child(n+80) { opacity: 0.06; }
+        
+        @keyframes matrixRain {
+          0% { 
+            transform: translateY(-1000px); 
+          }
+          100% { 
+            transform: translateY(700px); 
+          }
+        }
       `}</style>
 
       <div className="flex flex-col min-h-screen bg-black text-gray-100">
@@ -445,8 +552,23 @@ export default function LandingPage() {
             className="text-white font-mono text-lg font-medium mt-1"
             style={{ textDecoration: 'none' }}
           >
-            XI
+            IX
           </Link>
+          
+          {/* Matrix Rain Animation */}
+          <div className="matrix-rain-container mt-4 font-mono text-xs relative overflow-hidden" style={{ width: '104px', height: '600px' }} lang="en" translate="no">
+{Array.from({ length: 8 }, (_, colIndex) => (
+              <div key={colIndex} className="matrix-column" style={{ left: `${colIndex * 13}px` }} lang="en">
+                {Array.from({ length: 80 }, (_, i) => {
+                  const chars = 'ハミヒーウシナモニサワツオリアホテマケメエカキムユラセネスタヌヘヤヨトドン012345689Z';
+                  const randomChar = chars[Math.floor((Math.sin(colIndex * 7 + i * 3) * 0.5 + 0.5) * chars.length)];
+                  return (
+                    <span key={i} className="matrix-char">{randomChar}</span>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Hero Section */}
