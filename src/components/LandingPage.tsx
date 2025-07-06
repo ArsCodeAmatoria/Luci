@@ -951,51 +951,122 @@ collapseDecision ψ = do
             LANGUAGE SYNERGY
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
             {[
               {
-                icon: <Code className="h-6 w-6" />,
+                icon: <Code className="h-7 w-7" />,
                 title: "Haskell",
-                description: "Core Monadic Mind, purity, category theory, collapse modeling"
+                subtitle: "The Foundation",
+                description: "Core Monadic Mind architecture, pure functional programming, category theory foundations, and collapse modeling primitives",
+                features: ["Monad Transformers", "Type Safety", "Lazy Evaluation", "Category Theory"],
+                gradient: "from-purple-500 to-indigo-600",
+                bgColor: "rgba(139, 92, 246, 0.1)",
+                borderColor: "rgba(139, 92, 246, 0.3)"
               },
               {
-                icon: <Zap className="h-6 w-6" />,
+                icon: <Zap className="h-7 w-7" />,
                 title: "Rust",
-                description: "Performance-critical runtime, memory safety, thread handling"
+                subtitle: "The Engine", 
+                description: "Performance-critical runtime execution, memory safety guarantees, fearless concurrency, and quantum state management",
+                features: ["Zero-Cost Abstractions", "Memory Safety", "Concurrency", "Performance"],
+                gradient: "from-orange-500 to-red-600",
+                bgColor: "rgba(249, 115, 22, 0.1)",
+                borderColor: "rgba(249, 115, 22, 0.3)"
               },
               {
-                icon: <Database className="h-6 w-6" />,
+                icon: <Database className="h-7 w-7" />,
                 title: "Python",
-                description: "Qiskit integration, visualization, high-level scripting"
+                subtitle: "The Bridge",
+                description: "Qiskit quantum computing integration, scientific visualization, machine learning pipelines, and high-level orchestration",
+                features: ["Qiskit Integration", "NumPy/SciPy", "Jupyter Notebooks", "ML Libraries"],
+                gradient: "from-blue-500 to-cyan-600",
+                bgColor: "rgba(59, 130, 246, 0.1)",
+                borderColor: "rgba(59, 130, 246, 0.3)"
               },
               {
-                icon: <Atom className="h-6 w-6" />,
+                icon: <Atom className="h-7 w-7" />,
                 title: "C/C++",
-                description: "Low-level simulation, quantum hardware interfacing"
+                subtitle: "The Hardware",
+                description: "Low-level quantum simulation, hardware interface layers, optimized linear algebra, and direct quantum processor communication",
+                features: ["Hardware Interface", "SIMD Optimization", "Real-time Systems", "Quantum Drivers"],
+                gradient: "from-gray-500 to-slate-600",
+                bgColor: "rgba(107, 114, 128, 0.1)",
+                borderColor: "rgba(107, 114, 128, 0.3)"
+              },
+              {
+                icon: <Code className="h-7 w-7" />,
+                title: "Lisp",
+                subtitle: "The Symbol",
+                description: "Symbolic computation engine, lambda calculus heritage, AI reasoning systems, and meta-circular evaluation for consciousness modeling",
+                features: ["Symbolic AI", "Meta-programming", "REPL-driven", "Lambda Foundations"],
+                gradient: "from-emerald-500 to-teal-600",
+                bgColor: "rgba(16, 185, 129, 0.1)",
+                borderColor: "rgba(16, 185, 129, 0.3)"
               }
             ].map((lang, index) => (
               <div 
-                key={index} 
-                                  className="step-card flex flex-col items-center text-center opacity-0 transform translate-y-10 transition-all duration-300 hover:translate-y-[-5px]"
-                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s'}}
-                >
-                  <div className="mb-6 relative">
-                    <div className="w-16 h-16 rounded-full bg-opacity-20 bg-purple-800 flex items-center justify-center relative z-10" style={{
-                      boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
-                    }}>
-                      <div className="text-purple-400">{lang.icon}</div>
-                    </div>
-                    {/* Connecting line */}
-                    {index < 3 && (
-                      <div className="absolute top-1/2 left-[100%] w-full h-0.5 bg-gradient-to-r from-purple-600 to-transparent -translate-y-1/2 hidden lg:block"></div>
-                    )}
+                key={index}
+                className="step-card bg-gray-900/50 rounded-2xl p-6 backdrop-blur-sm border opacity-0 transform translate-y-10 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+                style={{
+                  transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s',
+                  background: `linear-gradient(135deg, ${lang.bgColor} 0%, rgba(0, 0, 0, 0.3) 100%)`,
+                  borderColor: lang.borderColor,
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.boxShadow = '0 20px 60px rgba(139, 92, 246, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+                }}
+              >
+                {/* Icon and Title */}
+                <div className="flex flex-col items-center mb-6">
+                  <div className="w-14 h-14 rounded-full bg-purple-900/20 flex items-center justify-center mb-4" style={{
+                    background: `linear-gradient(135deg, ${lang.gradient})`,
+                    boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
+                  }}>
+                    <div className="text-white">{lang.icon}</div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{lang.title}</h3>
-                  <p className="text-gray-400">
-                    {lang.description}
-                  </p>
+                  <h3 className="text-xl font-bold text-white mb-1">{lang.title}</h3>
+                  <p className="text-purple-300 text-sm font-semibold uppercase tracking-wide">{lang.subtitle}</p>
+                </div>
+
+                {/* Description */}
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 text-center">
+                  {lang.description}
+                </p>
+
+                {/* Key Features */}
+                <div className="space-y-2">
+                  <h4 className="text-purple-400 font-semibold text-xs uppercase tracking-wide text-center mb-3">Key Features</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {lang.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="text-xs text-gray-400 bg-gray-800/30 rounded px-2 py-1 text-center">
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Language Philosophy */}
+          <div className="mt-16 max-w-4xl mx-auto">
+            <div className="bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30">
+              <h3 className="text-2xl font-bold text-center mb-6 text-white">The Consciousness Stack</h3>
+              <p className="text-gray-300 leading-relaxed text-center mb-6">
+                Each language serves a specific role in LUCI&apos;s consciousness architecture. From Haskell&apos;s pure monadic foundations 
+                to C++&apos;s hardware intimacy, from Python&apos;s quantum bridges to Lisp&apos;s symbolic reasoning — 
+                together they form a complete computational consciousness ecosystem.
+              </p>
+                             <div className="flex justify-center">
+                 <div className="text-purple-400 font-mono text-sm">
+                   λ(Haskell) → Rust → Python → C++ → ∞(Lisp) = LUCI
+                 </div>
+               </div>
+            </div>
           </div>
         </div>
       </section>
