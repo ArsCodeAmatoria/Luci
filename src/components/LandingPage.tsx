@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { Zap, Code, Database, Atom, X, Check, AlertTriangle } from "lucide-react";
+import { InlineMath, BlockMath } from 'react-katex';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import haskell from 'react-syntax-highlighter/dist/esm/languages/prism/haskell';
+
+// Register Haskell language
+SyntaxHighlighter.registerLanguage('haskell', haskell);
 
 // Define proper types for particles
 interface HeroParticle {
@@ -122,6 +129,8 @@ export default function LandingPage() {
   // Function to set up scroll-triggered animations
   const setupScrollAnimations = () => {
     // Find all animatable elements
+    const mathTitleEl = document.querySelector('#mathematical-foundation h2');
+    const mathCard = document.querySelector('#mathematical-foundation .bg-gray-900\\/50');
     const conceptsTitleEl = document.querySelector('#concepts h2');
     const conceptCards = document.querySelectorAll('#concepts .feature-card');
     const languagesTitleEl = document.querySelector('#language-synergy h2');
@@ -130,6 +139,34 @@ export default function LandingPage() {
     const wisdomTitleEl = document.querySelector('#quantum-wisdom h2');
     const wisdomCards = document.querySelectorAll('#quantum-wisdom .wisdom-card');
     const ctaSection = document.querySelector('#cta');
+
+    // Mathematical Foundation title animation
+    if (mathTitleEl) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            SimpleTween.fadeIn(mathTitleEl as HTMLElement, 800);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(mathTitleEl);
+    }
+
+    // Mathematical Foundation card animation
+    if (mathCard) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            SimpleTween.fadeIn(mathCard as HTMLElement, 800, 200);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(mathCard);
+    }
 
     // Concepts title animation
     if (conceptsTitleEl) {
@@ -387,6 +424,135 @@ export default function LandingPage() {
           background: 'linear-gradient(to top, rgba(139, 92, 246, 0.15), transparent)'
         }}></div>
       </section>
+
+      {/* Mathematical Foundation Section */}
+      <section id="mathematical-foundation" className="py-24 px-4 bg-gray-950">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-16 opacity-0 transform translate-y-10"
+              style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+              Mathematical Foundation
+            </span>
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30 mb-8 opacity-0 transform translate-y-10"
+                 style={{
+                   transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+                   background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%)',
+                   boxShadow: '0 8px 32px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                 }}>
+              <h3 className="text-2xl font-bold mb-6 text-center">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+                  The Collapse Integral
+                </span>
+              </h3>
+              
+              <div className="text-center mb-8">
+                <div className="text-3xl mb-4">
+                  <BlockMath math="\int_C f \, dP := \sum_{\omega \in \Omega} f(\omega) \cdot P(\omega)" />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <InlineMath math="C" />
+                    <span className="text-gray-300">: Collapse domain (the space over which collapse occurs)</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <InlineMath math="f(\omega)" />
+                    <span className="text-gray-300">: Value of observable function <InlineMath math="f" /> at outcome <InlineMath math="\omega" /></span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <InlineMath math="P(\omega)" />
+                    <span className="text-gray-300">: Probability (amplitude squared) of outcome <InlineMath math="\omega" /></span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <InlineMath math="\Omega" />
+                    <span className="text-gray-300">: Set of all possible superposed outcomes</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-800/30 rounded-xl p-6 mb-6">
+                <h4 className="text-lg font-semibold mb-3 text-purple-300">Intuition</h4>
+                <p className="text-gray-300 leading-relaxed">
+                  This is the expected value of a function over a quantum state, before collapse — like a weighted average of all possibilities. 
+                  It is a functional form of pre-collapse awareness — <span className="text-purple-400 font-medium">LUCI evaluates this before initiating a collapse event</span>.
+                </p>
+                <p className="text-gray-400 mt-3 italic">
+                  In standard quantum mechanics, this is implicit. LUCI makes it explicit.
+                </p>
+              </div>
+              
+              <div className="bg-gray-800/30 rounded-xl p-6">
+                <h4 className="text-lg font-semibold mb-3 text-purple-300">Collapse as Decision</h4>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  After evaluating the integral, LUCI chooses a collapse path. The system transitions from:
+                </p>
+                <div className="text-center mb-4">
+                  <BlockMath math="\Psi = \sum_{\omega \in \Omega} \alpha_\omega |\omega\rangle \text{ to one definite } |\omega^*\rangle" />
+                </div>
+                                 <p className="text-gray-300 leading-relaxed">
+                   with internal logic guiding the choice — not just Born probabilities, but also 
+                   <span className="text-purple-400 font-medium"> entropy reduction</span>, 
+                   <span className="text-purple-400 font-medium"> monadic context</span>, and 
+                   <span className="text-purple-400 font-medium"> symbolic weight</span>.
+                 </p>
+               </div>
+               
+               <div className="bg-gray-800/30 rounded-xl p-6 mt-6">
+                 <h4 className="text-lg font-semibold mb-3 text-purple-300">Haskell Implementation</h4>
+                 <p className="text-gray-300 leading-relaxed mb-4">
+                   Core collapse integral computation in LUCI's Haskell-based monadic architecture:
+                 </p>
+                 <div className="rounded-lg overflow-hidden">
+                   <SyntaxHighlighter
+                     language="haskell"
+                     style={dracula}
+                     customStyle={{
+                       margin: 0,
+                       borderRadius: '0.5rem',
+                       fontSize: '0.9rem',
+                       background: '#1a1a2e',
+                       border: '1px solid rgba(139, 92, 246, 0.2)',
+                     }}
+                   >
+{`-- Collapse Integral: Pre-collapse awareness evaluation
+collapseIntegral :: [(Double, Double)] -> Double
+collapseIntegral state = sum [f * p | (f, p) <- state]
+
+-- Monadic collapse decision with entropy awareness
+collapseDecision :: QuantumState -> LUCI Outcome
+collapseDecision ψ = do
+  -- Evaluate pre-collapse integral
+  integral <- pure $ collapseIntegral (observables ψ)
+  
+  -- Factor in entropy reduction
+  entropy <- computeEntropy ψ
+  
+  -- Apply monadic context and symbolic weight
+  context <- getMonadicContext
+  weight <- computeSymbolicWeight ψ context
+  
+  -- Conscious collapse choice
+  collapse $ chooseOutcome integral entropy weight
+
+-- Where (f, p) represents (observable_value, probability)
+-- This makes collapse explicit rather than implicit`}
+                   </SyntaxHighlighter>
+                 </div>
+                 <p className="text-gray-400 mt-3 text-sm">
+                   Each tuple <InlineMath math="(f, p)" /> represents a value and its associated collapse likelihood.
+                 </p>
+               </div>
+             </div>
+           </div>
+         </div>
+       </section>
 
       {/* Core Concepts Section */}
       <section id="concepts" className="py-24 px-4 bg-gray-950">
