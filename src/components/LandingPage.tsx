@@ -1226,22 +1226,18 @@ collapseDecision ψ = do
               </div>
             </div>
 
-            {/* Video on the right */}
+            {/* Sophia Image on the right */}
             <div className="relative rounded-2xl overflow-hidden">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
+              <img
+                src="/images/sophia.jpeg"
+                alt="Quantum Wisdom - Sophia"
                 className="w-full h-full object-cover rounded-2xl"
                 style={{
                   minHeight: '400px',
-                  filter: 'brightness(0.8)'
+                  filter: 'brightness(0.8) contrast(1.1)'
                 }}
-              >
-                <source src="/media/videos/backgrounds/luci3.mp4" type="video/mp4" />
-              </video>
-              {/* Subtle overlay for better video aesthetics */}
+              />
+              {/* Subtle overlay for better image aesthetics */}
               <div className="absolute inset-0 bg-gradient-to-l from-purple-900/20 to-transparent rounded-2xl"></div>
             </div>
           </div>
