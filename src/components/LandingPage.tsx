@@ -895,7 +895,7 @@ collapseDecision ψ = do
                           <span className="text-purple-400">PARADIGM:</span> Consciousness as collapse-bound monadic computation
                         </p>
                         <p className="text-gray-500 text-xs mt-2 italic">
-                          // Not Turing tapes. Monadic structures.
+                          {`// Not Turing tapes. Monadic structures.`}
                         </p>
                       </div>
                     </div>
@@ -925,7 +925,7 @@ collapseDecision ψ = do
                           <span className="text-purple-400">MAPPING:</span> Qiskit + custom simulators
                         </p>
                         <p className="text-gray-500 text-xs mt-2 italic">
-                          // Decisions via collapse, not unitary evolution
+                          {`// Decisions via collapse, not unitary evolution`}
                         </p>
                       </div>
                     </div>
@@ -955,7 +955,7 @@ collapseDecision ψ = do
                           <span className="text-purple-400">OBEYS:</span> Laws of informational irreversibility
                         </p>
                         <p className="text-gray-500 text-xs mt-2 italic">
-                          // Akin to minds and choices
+                          {`// Akin to minds and choices`}
                         </p>
                       </div>
                     </div>
