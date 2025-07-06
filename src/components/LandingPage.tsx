@@ -507,7 +507,7 @@ export default function LandingPage() {
                <div className="bg-gray-800/30 rounded-xl p-6 mt-6">
                  <h4 className="text-lg font-semibold mb-3 text-purple-300">Haskell Implementation</h4>
                  <p className="text-gray-300 leading-relaxed mb-4">
-                   Core collapse integral computation in LUCI's Haskell-based monadic architecture:
+                   Core collapse integral computation in LUCI&apos;s Haskell-based monadic architecture:
                  </p>
                  <div className="rounded-lg overflow-hidden">
                    <SyntaxHighlighter
