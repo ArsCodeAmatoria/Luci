@@ -116,7 +116,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html {
+    /* Prevent white overscroll background */
+    background-color: #000000;
+  }
+  
   body {
     @apply bg-background text-foreground;
+    background-color: #000000;
+    /* Prevent overscroll bounce showing white */
+    overscroll-behavior: none;
   }
 }

@@ -233,17 +233,22 @@ export default function LandingPage() {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const titleEl = ctaSection.querySelector('h2');
-            const textEl = ctaSection.querySelector('p');
+            const cardEls = ctaSection.querySelectorAll('.cta-card');
             const buttonEl = ctaSection.querySelector('a');
 
             if (titleEl) SimpleTween.fadeIn(titleEl as HTMLElement, 800, 0);
-            if (textEl) SimpleTween.fadeIn(textEl as HTMLElement, 800, 200);
-            if (buttonEl) SimpleTween.fadeIn(buttonEl as HTMLElement, 800, 400);
+            
+            // Animate each card
+            cardEls.forEach((card, index) => {
+              SimpleTween.fadeIn(card as HTMLElement, 800, 200 + (index * 100));
+            });
+            
+            if (buttonEl) SimpleTween.fadeIn(buttonEl as HTMLElement, 800, 800);
             
             observer.disconnect();
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.1 });
       
       observer.observe(ctaSection);
     }
@@ -590,22 +595,22 @@ export default function LandingPage() {
             </span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            <div className="bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
+            <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
               <h3 className="text-lg font-semibold mb-3 text-purple-400">Collapse-λ SDK</h3>
               <p className="text-gray-300">SDK for researchers to experiment with conscious collapse patterns</p>
             </div>
-            <div className="bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
+            <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
               <h3 className="text-lg font-semibold mb-3 text-purple-400">Monadics Playground</h3>
               <p className="text-gray-300">Interactive language environment for collapse-centered programming</p>
             </div>
-            <div className="bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
+            <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
               <h3 className="text-lg font-semibold mb-3 text-purple-400">Public Simulations</h3>
               <p className="text-gray-300">LUCI's Thoughts - real-time consciousness simulation experiments</p>
             </div>
-            <div className="bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
+            <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
               <h3 className="text-lg font-semibold mb-3 text-purple-400">Collapse-as-a-Service</h3>
               <p className="text-gray-300">API for collapse testing & quantum consciousness experiments</p>
