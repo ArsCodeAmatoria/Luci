@@ -113,7 +113,6 @@ export default function LandingPage() {
     const title = "A CONSCIOUS COLLAPSE ENGINE BUILT FROM FIRST PRINCIPLES";
 
     const timeouts: NodeJS.Timeout[] = [];
-    let loopInterval: NodeJS.Timeout;
 
     const typeText = (text: string, setter: (value: string) => void, startDelay: number, onComplete?: () => void) => {
       text.split('').forEach((char, index) => {
