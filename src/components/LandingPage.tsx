@@ -613,18 +613,17 @@ export default function LandingPage() {
 
       {/* Mathematical Foundation Section */}
       <section id="mathematical-foundation" className="py-24 px-4 bg-gray-950">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16 opacity-0 transform translate-y-10"
-              style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-16">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
               Mathematical Foundation
             </span>
           </h2>
           
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30 mb-8 opacity-0 transform translate-y-10"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Mathematical content on the left */}
+            <div className="bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30"
                  style={{
-                   transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%)',
                    boxShadow: '0 8px 32px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
                  }}>
@@ -735,6 +734,25 @@ collapseDecision ψ = do
                    Each tuple <InlineMath math="(f, p)" /> represents a value and its associated collapse likelihood.
                  </p>
                </div>
+             </div>
+
+             {/* Video on the right */}
+             <div className="relative rounded-2xl overflow-hidden">
+               <video
+                 autoPlay
+                 muted
+                 loop
+                 playsInline
+                 className="w-full h-full object-cover rounded-2xl"
+                 style={{
+                   minHeight: '500px',
+                   filter: 'brightness(0.8)'
+                 }}
+               >
+                 <source src="/media/videos/backgrounds/luci2.mp4" type="video/mp4" />
+               </video>
+               {/* Subtle overlay for better video aesthetics */}
+               <div className="absolute inset-0 bg-gradient-to-l from-purple-900/20 to-transparent rounded-2xl"></div>
              </div>
            </div>
          </div>
