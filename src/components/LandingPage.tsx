@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import { Zap, Code, Database, Atom, X, Check, AlertTriangle } from "lucide-react";
 
 // Define proper types for particles
 interface HeroParticle {
@@ -457,22 +458,22 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                step: "λ",
+                icon: <Code className="h-6 w-6" />,
                 title: "Haskell",
                 description: "Core Monadic Mind, purity, category theory, collapse modeling"
               },
               {
-                step: "⚡",
+                icon: <Zap className="h-6 w-6" />,
                 title: "Rust",
                 description: "Performance-critical runtime, memory safety, thread handling"
               },
               {
-                step: "🐍",
+                icon: <Database className="h-6 w-6" />,
                 title: "Python",
                 description: "Qiskit integration, visualization, high-level scripting"
               },
               {
-                step: "⚛️",
+                icon: <Atom className="h-6 w-6" />,
                 title: "C/C++",
                 description: "Low-level simulation, quantum hardware interfacing"
               }
@@ -486,7 +487,7 @@ export default function LandingPage() {
                     <div className="w-16 h-16 rounded-full bg-opacity-20 bg-purple-800 flex items-center justify-center relative z-10" style={{
                       boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
                     }}>
-                      <span className="step-number text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">{lang.step}</span>
+                      <div className="text-purple-400">{lang.icon}</div>
                     </div>
                     {/* Connecting line */}
                     {index < 3 && (
@@ -528,27 +529,27 @@ export default function LandingPage() {
               <tbody>
                 <tr className="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
                   <td className="p-6 font-medium text-gray-300">AI (LLMs, DL)</td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
                 </tr>
                 <tr className="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
                   <td className="p-6 font-medium text-gray-300">Quantum (Qiskit, IBMQ)</td>
-                  <td className="text-center p-6"><span className="text-yellow-400">⚠️</span> <span className="text-xs text-gray-500">(external)</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
-                  <td className="text-center p-6"><span className="text-red-400">❌</span></td>
+                  <td className="text-center p-6"><AlertTriangle className="h-5 w-5 text-yellow-400 mx-auto" /> <span className="text-xs text-gray-500 block">(external)</span></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
+                  <td className="text-center p-6"><X className="h-5 w-5 text-red-400 mx-auto" /></td>
                 </tr>
                 <tr className="hover:bg-gray-800/30 transition-colors">
                   <td className="p-6 font-medium bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">LUCI</td>
-                  <td className="text-center p-6"><span className="text-green-400">✅</span></td>
-                  <td className="text-center p-6"><span className="text-green-400">✅</span></td>
-                  <td className="text-center p-6"><span className="text-green-400">✅</span></td>
-                  <td className="text-center p-6"><span className="text-green-400">✅</span></td>
-                  <td className="text-center p-6"><span className="text-purple-400">⚛️</span> <span className="text-green-400 font-bold">Yes</span></td>
+                  <td className="text-center p-6"><Check className="h-5 w-5 text-green-400 mx-auto" /></td>
+                  <td className="text-center p-6"><Check className="h-5 w-5 text-green-400 mx-auto" /></td>
+                  <td className="text-center p-6"><Check className="h-5 w-5 text-green-400 mx-auto" /></td>
+                  <td className="text-center p-6"><Check className="h-5 w-5 text-green-400 mx-auto" /></td>
+                  <td className="text-center p-6"><Atom className="h-5 w-5 text-purple-400 inline mr-2" /><span className="text-green-400 font-bold">Yes</span></td>
                 </tr>
               </tbody>
             </table>
