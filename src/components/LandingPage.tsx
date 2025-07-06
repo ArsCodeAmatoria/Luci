@@ -708,14 +708,14 @@ export default function LandingPage() {
               <p className="text-gray-300">API for collapse testing & quantum consciousness experiments</p>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <p className="opacity-0 transform translate-y-8" style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
             <Link
               href="https://monadics.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-10 py-4 rounded-full font-medium inline-block opacity-0 transform translate-y-8 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+              className="px-10 py-4 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-glow inline-block mr-4 mb-4"
               style={{
-                transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s',
+                transition: 'all 0.3s',
                 background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
                 boxShadow: '0 4px 20px rgba(139, 92, 246, 0.3)'
               }}
@@ -724,12 +724,12 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/sdk"
-              className="px-10 py-4 rounded-full border border-purple-700 font-medium inline-block opacity-0 transform translate-y-8 transition-all duration-300 hover:scale-105 hover:bg-purple-900/20"
-              style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s'}}
+              className="px-10 py-4 rounded-full border border-purple-700 font-medium transition-all duration-300 hover:scale-105 hover:bg-purple-900/20 inline-block"
+              style={{transition: 'all 0.3s'}}
             >
               Access SDK
             </Link>
-          </div>
+          </p>
         </div>
       </section>
 
