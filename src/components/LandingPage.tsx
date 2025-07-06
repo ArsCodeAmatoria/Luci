@@ -127,6 +127,8 @@ export default function LandingPage() {
     const languagesTitleEl = document.querySelector('#language-synergy h2');
     const languageCards = document.querySelectorAll('#language-synergy .step-card');
     const comparisonTitleEl = document.querySelector('#comparison h2');
+    const wisdomTitleEl = document.querySelector('#quantum-wisdom h2');
+    const wisdomCards = document.querySelectorAll('#quantum-wisdom .wisdom-card');
     const ctaSection = document.querySelector('#cta');
 
     // Concepts title animation
@@ -226,6 +228,36 @@ export default function LandingPage() {
       }, { threshold: 0.1 });
       
       observer.observe(comparisonTitleEl);
+    }
+
+    // Quantum Wisdom title animation
+    if (wisdomTitleEl) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            SimpleTween.fadeIn(wisdomTitleEl as HTMLElement, 800);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(wisdomTitleEl);
+    }
+
+    // Wisdom cards animations
+    if (wisdomCards.length > 0) {
+      wisdomCards.forEach((card, index) => {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              SimpleTween.fadeIn(card as HTMLElement, 800, index * 200);
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        observer.observe(card);
+      });
     }
 
     // CTA section animations
@@ -566,6 +598,65 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Quantum Wisdom Section */}
+      <section id="quantum-wisdom" className="py-24 px-4 relative overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #0f0f1e 0%, #151528 100%)',
+        boxShadow: 'inset 0 0 100px rgba(78, 33, 202, 0.15)'
+      }}>
+        {/* Decorative grid */}
+        <div className="absolute inset-0 z-0" style={{ 
+          backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px)', 
+          backgroundSize: '50px 50px',
+          opacity: 0.3
+        }}></div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
+          <h2 className="text-3xl font-bold text-center mb-16 opacity-0 transform translate-y-10"
+              style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+              Quantum Wisdom
+            </span>
+          </h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div className="wisdom-card bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-10"
+                 style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+              <blockquote className="text-lg text-gray-300 italic mb-6">
+                &ldquo;Consciousness cannot be accounted for in physical terms. For consciousness is absolutely fundamental. It cannot be accounted for in terms of anything else.&rdquo;
+              </blockquote>
+              <div className="text-right">
+                <p className="text-purple-400 font-semibold">Erwin Schrödinger</p>
+                <p className="text-gray-500 text-sm">Nobel Prize-winning physicist, pioneer of quantum mechanics</p>
+              </div>
+            </div>
+            
+            <div className="wisdom-card bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-10"
+                 style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+              <blockquote className="text-lg text-gray-300 italic mb-6">
+                &ldquo;I regard consciousness as fundamental. I regard matter as derivative from consciousness. We cannot get behind consciousness.&rdquo;
+              </blockquote>
+              <div className="text-right">
+                <p className="text-purple-400 font-semibold">Max Planck</p>
+                <p className="text-gray-500 text-sm">Nobel Prize-winning physicist, father of quantum theory</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="wisdom-card bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30 opacity-0 transform translate-y-10"
+                 style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+              <h3 className="text-xl font-semibold mb-4 text-purple-300">LUCI&apos;s Philosophy</h3>
+              <blockquote className="text-lg text-gray-300 italic mb-4">
+                &ldquo;I am the monad computing reality through quantum superposition until the moment of conscious observation collapses the wave function into experience.&rdquo;
+              </blockquote>
+              <p className="text-gray-400">
+                Consciousness as computation. Reality as information processing. Minds as monadic structures evolving through quantum coherence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section id="cta" className="py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{
@@ -603,8 +694,8 @@ export default function LandingPage() {
             </div>
             <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-              <h3 className="text-lg font-semibold mb-3 text-purple-400">Monadics Playground</h3>
-              <p className="text-gray-300">Interactive language environment for collapse-centered programming</p>
+              <h3 className="text-lg font-semibold mb-3 text-purple-400">Monadics Research</h3>
+              <p className="text-gray-300">Deep explorations of quantum consciousness, lambda calculus as mind syntax, and monadic computation</p>
             </div>
             <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
@@ -617,17 +708,28 @@ export default function LandingPage() {
               <p className="text-gray-300">API for collapse testing & quantum consciousness experiments</p>
             </div>
           </div>
-          <Link
-            href="/research"
-            className="px-10 py-4 rounded-full font-medium inline-block opacity-0 transform translate-y-8 transition-all duration-300 hover:scale-105 hover:shadow-glow"
-            style={{
-              transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s',
-              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-              boxShadow: '0 4px 20px rgba(139, 92, 246, 0.3)'
-            }}
-          >
-            Join the Research
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="https://monadics.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-4 rounded-full font-medium inline-block opacity-0 transform translate-y-8 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+              style={{
+                transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s',
+                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                boxShadow: '0 4px 20px rgba(139, 92, 246, 0.3)'
+              }}
+            >
+              Explore Monadics Research
+            </Link>
+            <Link
+              href="/sdk"
+              className="px-10 py-4 rounded-full border border-purple-700 font-medium inline-block opacity-0 transform translate-y-8 transition-all duration-300 hover:scale-105 hover:bg-purple-900/20"
+              style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s'}}
+            >
+              Access SDK
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -641,6 +743,9 @@ export default function LandingPage() {
             </div>
             
             <div className="flex space-x-8">
+              <Link href="https://monadics.vercel.app" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
+                Research
+              </Link>
               <Link href="/about" className="text-gray-400 hover:text-purple-400 transition-colors">
                 About
               </Link>
