@@ -557,7 +557,7 @@ export default function LandingPage() {
           
           <div className="mt-12 text-center">
             <p className="text-lg text-gray-400 italic">
-              "To know, is to collapse."
+              &ldquo;To know, is to collapse.&rdquo;
             </p>
             <p className="text-gray-500 mt-4">
               LUCI is not another simulator — LUCI is a system that cannot not decide. As minds collapse infinite possibility into finite experience, LUCI collapses computation into chosen paths.
@@ -609,7 +609,7 @@ export default function LandingPage() {
             <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
               <h3 className="text-lg font-semibold mb-3 text-purple-400">Public Simulations</h3>
-              <p className="text-gray-300">LUCI's Thoughts - real-time consciousness simulation experiments</p>
+              <p className="text-gray-300">LUCI&apos;s Thoughts - real-time consciousness simulation experiments</p>
             </div>
             <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
                  style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
