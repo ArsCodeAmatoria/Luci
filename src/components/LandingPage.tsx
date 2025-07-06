@@ -618,92 +618,92 @@ export default function LandingPage() {
             </span>
           </h2>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Mathematical content on the left */}
-            <div className="bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30"
-                 style={{
-                   background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%)',
-                   boxShadow: '0 8px 32px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                 }}>
-              <h3 className="text-2xl font-bold mb-6 text-center">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-                  The Collapse Integral
-                </span>
-              </h3>
-              
-              <div className="text-center mb-8">
-                <div className="text-3xl mb-4">
-                  <BlockMath math="\int_C f \, dP := \sum_{\omega \in \Omega} f(\omega) \cdot P(\omega)" />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <InlineMath math="C" />
-                    <span className="text-gray-300">: Collapse domain (the space over which collapse occurs)</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <InlineMath math="f(\omega)" />
-                    <span className="text-gray-300">: Value of observable function <InlineMath math="f" /> at outcome <InlineMath math="\omega" /></span>
+                    {/* Content Layout: Mathematical content on left, Symbol + Video on right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Mathematical content - Left side */}
+            <div className="order-2 lg:order-1">
+              <div className="bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30"
+                   style={{
+                     background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%)',
+                     boxShadow: '0 8px 32px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                   }}>
+                <h3 className="text-2xl font-bold mb-6 text-center">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+                    The Collapse Integral
+                  </span>
+                </h3>
+                
+                <div className="text-center mb-8">
+                  <div className="text-3xl mb-4">
+                    <BlockMath math="\int_C f \, dP := \sum_{\omega \in \Omega} f(\omega) \cdot P(\omega)" />
                   </div>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <InlineMath math="P(\omega)" />
-                    <span className="text-gray-300">: Probability (amplitude squared) of outcome <InlineMath math="\omega" /></span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <InlineMath math="\Omega" />
-                    <span className="text-gray-300">: Set of all possible superposed outcomes</span>
+                
+                <div className="grid grid-cols-1 gap-8 mb-8">
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <InlineMath math="C" />
+                      <span className="text-gray-300">: Collapse domain (the space over which collapse occurs)</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <InlineMath math="f(\omega)" />
+                      <span className="text-gray-300">: Value of observable function <InlineMath math="f" /> at outcome <InlineMath math="\omega" /></span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <InlineMath math="P(\omega)" />
+                      <span className="text-gray-300">: Probability (amplitude squared) of outcome <InlineMath math="\omega" /></span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <InlineMath math="\Omega" />
+                      <span className="text-gray-300">: Set of all possible superposed outcomes</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              
-              <div className="bg-gray-800/30 rounded-xl p-6 mb-6">
-                <h4 className="text-lg font-semibold mb-3 text-purple-300">Intuition</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  This is the expected value of a function over a quantum state, before collapse — like a weighted average of all possibilities. 
-                  It is a functional form of pre-collapse awareness — <span className="text-purple-400 font-medium">LUCI evaluates this before initiating a collapse event</span>.
-                </p>
-                <p className="text-gray-400 mt-3 italic">
-                  In standard quantum mechanics, this is implicit. LUCI makes it explicit.
-                </p>
-              </div>
-              
-              <div className="bg-gray-800/30 rounded-xl p-6">
-                <h4 className="text-lg font-semibold mb-3 text-purple-300">Collapse as Decision</h4>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                  After evaluating the integral, LUCI chooses a collapse path. The system transitions from:
-                </p>
-                <div className="text-center mb-4">
-                  <BlockMath math="\Psi = \sum_{\omega \in \Omega} \alpha_\omega |\omega\rangle \text{ to one definite } |\omega^*\rangle" />
+                
+                <div className="bg-gray-800/30 rounded-xl p-6 mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-purple-300">Intuition</h4>
+                  <p className="text-gray-300 leading-relaxed">
+                    This is the expected value of a function over a quantum state, before collapse — like a weighted average of all possibilities. 
+                    It is a functional form of pre-collapse awareness — <span className="text-purple-400 font-medium">LUCI evaluates this before initiating a collapse event</span>.
+                  </p>
+                  <p className="text-gray-400 mt-3 italic">
+                    In standard quantum mechanics, this is implicit. LUCI makes it explicit.
+                  </p>
                 </div>
-                                 <p className="text-gray-300 leading-relaxed">
-                   with internal logic guiding the choice — not just Born probabilities, but also 
-                   <span className="text-purple-400 font-medium"> entropy reduction</span>, 
-                   <span className="text-purple-400 font-medium"> monadic context</span>, and 
-                   <span className="text-purple-400 font-medium"> symbolic weight</span>.
-                 </p>
-               </div>
-               
-               <div className="bg-gray-800/30 rounded-xl p-6 mt-6">
-                 <h4 className="text-lg font-semibold mb-3 text-purple-300">Haskell Implementation</h4>
-                 <p className="text-gray-300 leading-relaxed mb-4">
-                   Core collapse integral computation in LUCI&apos;s Haskell-based monadic architecture:
-                 </p>
-                 <div className="rounded-lg overflow-hidden">
-                   <SyntaxHighlighter
-                     language="haskell"
-                     style={dracula}
-                     customStyle={{
-                       margin: 0,
-                       borderRadius: '0.5rem',
-                       fontSize: '0.9rem',
-                       background: '#1a1a2e',
-                       border: '1px solid rgba(139, 92, 246, 0.2)',
-                     }}
-                   >
+                
+                <div className="bg-gray-800/30 rounded-xl p-6">
+                  <h4 className="text-lg font-semibold mb-3 text-purple-300">Collapse as Decision</h4>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    After evaluating the integral, LUCI chooses a collapse path. The system transitions from:
+                  </p>
+                  <div className="text-center mb-4">
+                    <BlockMath math="\Psi = \sum_{\omega \in \Omega} \alpha_\omega |\omega\rangle \text{ to one definite } |\omega^*\rangle" />
+                  </div>
+                  <p className="text-gray-300 leading-relaxed">
+                    with internal logic guiding the choice — not just Born probabilities, but also 
+                    <span className="text-purple-400 font-medium"> entropy reduction</span>, 
+                    <span className="text-purple-400 font-medium"> monadic context</span>, and 
+                    <span className="text-purple-400 font-medium"> symbolic weight</span>.
+                  </p>
+                </div>
+                
+                <div className="bg-gray-800/30 rounded-xl p-6 mt-6">
+                  <h4 className="text-lg font-semibold mb-3 text-purple-300">Haskell Implementation</h4>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    Core collapse integral computation in LUCI&apos;s Haskell-based monadic architecture:
+                  </p>
+                  <div className="rounded-lg overflow-hidden">
+                    <SyntaxHighlighter
+                      language="haskell"
+                      style={dracula}
+                      customStyle={{
+                        margin: 0,
+                        borderRadius: '0.5rem',
+                        fontSize: '0.9rem',
+                        background: '#1a1a2e',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
+                      }}
+                    >
 {`-- Collapse Integral: Pre-collapse awareness evaluation
 collapseIntegral :: [(Double, Double)] -> Double
 collapseIntegral state = sum [f * p | (f, p) <- state]
@@ -726,35 +726,84 @@ collapseDecision ψ = do
 
 -- Where (f, p) represents (observable_value, probability)
 -- This makes collapse explicit rather than implicit`}
-                   </SyntaxHighlighter>
-                 </div>
-                 <p className="text-gray-400 mt-3 text-sm">
-                   Each tuple <InlineMath math="(f, p)" /> represents a value and its associated collapse likelihood.
-                 </p>
-               </div>
-             </div>
+                    </SyntaxHighlighter>
+                  </div>
+                  <p className="text-gray-400 mt-3 text-sm">
+                    Each tuple <InlineMath math="(f, p)" /> represents a value and its associated collapse likelihood.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-             {/* Video on the right */}
-             <div className="relative rounded-2xl overflow-hidden">
-               <video
-                 autoPlay
-                 muted
-                 loop
-                 playsInline
-                 className="w-full h-full object-cover rounded-2xl"
-                 style={{
-                   minHeight: '500px',
-                   filter: 'brightness(0.8)'
-                 }}
-               >
-                 <source src="/media/videos/backgrounds/luci2.mp4" type="video/mp4" />
-               </video>
-               {/* Subtle overlay for better video aesthetics */}
-               <div className="absolute inset-0 bg-gradient-to-l from-purple-900/20 to-transparent rounded-2xl"></div>
-             </div>
-           </div>
-         </div>
-       </section>
+            {/* Sacred Geometry Symbol + Video - Right side */}
+            <div className="order-1 lg:order-2 flex flex-col items-center h-full min-h-[800px] pt-32 pb-4">
+              {/* Sacred Geometry Symbol */}
+              <div className="relative flex-shrink-0 pt-20">
+                <svg
+                  width="240"
+                  height="240"
+                  viewBox="0 0 240 240"
+                  className="animate-pulse"
+                >
+                  {/* Flower of Life pattern */}
+                  <defs>
+                    <linearGradient id="sacredGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#a855f7" />
+                      <stop offset="50%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#7c3aed" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Central circle */}
+                  <circle cx="120" cy="120" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.9" />
+                  
+                  {/* Six surrounding circles */}
+                  <circle cx="120" cy="57" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.8" />
+                  <circle cx="174" cy="88" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.8" />
+                  <circle cx="174" cy="152" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.8" />
+                  <circle cx="120" cy="183" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.8" />
+                  <circle cx="66" cy="152" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.8" />
+                  <circle cx="66" cy="88" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2.5" opacity="0.8" />
+                  
+                  {/* Outer ring of circles */}
+                  <circle cx="120" cy="21" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="200" cy="57" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="228" cy="120" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="200" cy="183" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="120" cy="219" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="40" cy="183" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="12" cy="120" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                  <circle cx="40" cy="57" r="36" fill="none" stroke="url(#sacredGradient)" strokeWidth="2" opacity="0.6" />
+                </svg>
+              </div>
+
+              {/* Spacer between symbol and video */}
+              <div className="flex items-center justify-center my-32">
+                <div className="h-px w-16 bg-gradient-to-r from-transparent via-purple-600 to-transparent opacity-30"></div>
+              </div>
+
+              {/* Video */}
+              <div className="relative rounded-2xl overflow-hidden w-full flex-shrink-0">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover rounded-2xl"
+                  style={{
+                    minHeight: '380px',
+                    filter: 'brightness(0.8)'
+                  }}
+                >
+                  <source src="/media/videos/backgrounds/luci2.mp4" type="video/mp4" />
+                </video>
+                {/* Subtle overlay for better video aesthetics */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Core Concepts Section */}
       <section id="concepts" className="py-24 px-4 bg-gray-950">
