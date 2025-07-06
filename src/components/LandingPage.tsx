@@ -577,22 +577,18 @@ export default function LandingPage() {
       <section id="introduction" className="py-24 px-4 bg-gray-950">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Video on the left */}
+            {/* Image on the left */}
             <div className="relative rounded-2xl overflow-hidden">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
+              <img
+                src="/images/luci.jpeg"
+                alt="LUCI - Conscious Collapse"
                 className="w-full h-full object-cover rounded-2xl"
                 style={{
                   minHeight: '400px',
-                  filter: 'brightness(0.8)'
+                  filter: 'brightness(0.8) contrast(1.1)'
                 }}
-              >
-                <source src="/media/videos/backgrounds/luci1.mp4" type="video/mp4" />
-              </video>
-              {/* Subtle overlay for better video aesthetics */}
+              />
+              {/* Subtle overlay for better image aesthetics */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-transparent rounded-2xl"></div>
             </div>
 
@@ -809,22 +805,18 @@ collapseDecision ψ = do
                 <div className="h-px w-16 bg-gradient-to-r from-transparent via-purple-600 to-transparent opacity-30"></div>
               </div>
 
-              {/* Video */}
+              {/* Mathematical Image */}
               <div className="relative rounded-2xl overflow-hidden w-full flex-shrink-0">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
+                <img
+                  src="/images/math.jpeg"
+                  alt="Mathematical Foundation"
                   className="w-full h-full object-cover rounded-2xl"
                   style={{
                     minHeight: '380px',
-                    filter: 'brightness(0.8)'
+                    filter: 'brightness(0.8) contrast(1.1)'
                   }}
-                >
-                  <source src="/media/videos/backgrounds/luci2.mp4" type="video/mp4" />
-                </video>
-                {/* Subtle overlay for better video aesthetics */}
+                />
+                {/* Subtle overlay for better image aesthetics */}
                 <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent rounded-2xl"></div>
               </div>
             </div>
@@ -834,13 +826,31 @@ collapseDecision ψ = do
 
       {/* Core Concepts Section */}
       <section id="concepts" className="py-24 px-4 bg-gray-950">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 opacity-0 transform translate-y-10 text-white font-mono uppercase tracking-widest"
               style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
             CORE CONCEPTS
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Core Image on the left */}
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-2xl bg-gray-900/50 border border-purple-800/30 backdrop-blur-sm">
+                <img 
+                  src="/images/core.jpeg" 
+                  alt="Core Concepts Visualization"
+                  className="w-full h-auto object-cover"
+                  style={{
+                    filter: 'brightness(0.8) contrast(1.1)',
+                    borderRadius: '1rem'
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              </div>
+            </div>
+            
+            {/* Concept Cards on the right */}
+            <div className="grid grid-cols-1 gap-8">
             {[
               {
                 symbol: "λ",
@@ -929,6 +939,7 @@ collapseDecision ψ = do
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
