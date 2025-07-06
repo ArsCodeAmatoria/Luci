@@ -112,7 +112,7 @@ export default function LandingPage() {
     const subtitle = "LUCI: THE MONADIC MIND";
     const title = "A CONSCIOUS COLLAPSE ENGINE BUILT FROM FIRST PRINCIPLES";
 
-    let timeouts: NodeJS.Timeout[] = [];
+    const timeouts: NodeJS.Timeout[] = [];
 
     const typeText = (text: string, setter: (value: string) => void, startDelay: number, onComplete?: () => void) => {
       text.split('').forEach((char, index) => {

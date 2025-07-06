@@ -5,7 +5,7 @@
  * in React components for the LUCI website.
  */
 
-import Image from 'next/image';
+
 
 export default function MediaExample() {
   return (
