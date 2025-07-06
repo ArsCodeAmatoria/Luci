@@ -951,13 +951,13 @@ collapseDecision ψ = do
             LANGUAGE SYNERGY
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8 gap-4">
             {[
               {
                 icon: <Code className="h-7 w-7" />,
                 title: "Haskell",
-                subtitle: "The Foundation",
-                description: "Core Monadic Mind architecture, pure functional programming, category theory foundations, and collapse modeling primitives",
+                subtitle: "Core Foundation",
+                description: "Core Monadic Mind, purity, category theory, collapse modeling",
                 features: ["Monad Transformers", "Type Safety", "Lazy Evaluation", "Category Theory"],
                 gradient: "from-purple-500 to-indigo-600",
                 bgColor: "rgba(139, 92, 246, 0.1)",
@@ -966,8 +966,8 @@ collapseDecision ψ = do
               {
                 icon: <Zap className="h-7 w-7" />,
                 title: "Rust",
-                subtitle: "The Engine", 
-                description: "Performance-critical runtime execution, memory safety guarantees, fearless concurrency, and quantum state management",
+                subtitle: "Performance Engine", 
+                description: "Performance-critical runtime, memory safety, thread handling",
                 features: ["Zero-Cost Abstractions", "Memory Safety", "Concurrency", "Performance"],
                 gradient: "from-orange-500 to-red-600",
                 bgColor: "rgba(249, 115, 22, 0.1)",
@@ -976,8 +976,8 @@ collapseDecision ψ = do
               {
                 icon: <Database className="h-7 w-7" />,
                 title: "Python",
-                subtitle: "The Bridge",
-                description: "Qiskit quantum computing integration, scientific visualization, machine learning pipelines, and high-level orchestration",
+                subtitle: "Quantum Bridge",
+                description: "Qiskit integration, visualization, high-level scripting",
                 features: ["Qiskit Integration", "NumPy/SciPy", "Jupyter Notebooks", "ML Libraries"],
                 gradient: "from-blue-500 to-cyan-600",
                 bgColor: "rgba(59, 130, 246, 0.1)",
@@ -986,8 +986,8 @@ collapseDecision ψ = do
               {
                 icon: <Atom className="h-7 w-7" />,
                 title: "C/C++",
-                subtitle: "The Hardware",
-                description: "Low-level quantum simulation, hardware interface layers, optimized linear algebra, and direct quantum processor communication",
+                subtitle: "Hardware Interface",
+                description: "Low-level simulation, quantum hardware interfacing",
                 features: ["Hardware Interface", "SIMD Optimization", "Real-time Systems", "Quantum Drivers"],
                 gradient: "from-gray-500 to-slate-600",
                 bgColor: "rgba(107, 114, 128, 0.1)",
@@ -995,15 +995,45 @@ collapseDecision ψ = do
               },
               {
                 icon: <Code className="h-7 w-7" />,
-                title: "Lisp",
-                subtitle: "The Symbol",
-                description: "Symbolic computation engine, lambda calculus heritage, AI reasoning systems, and meta-circular evaluation for consciousness modeling",
-                features: ["Symbolic AI", "Meta-programming", "REPL-driven", "Lambda Foundations"],
-                gradient: "from-emerald-500 to-teal-600",
-                bgColor: "rgba(16, 185, 129, 0.1)",
-                borderColor: "rgba(16, 185, 129, 0.3)"
-              }
-            ].map((lang, index) => (
+                title: "Prolog",
+                subtitle: "Logic Engine",
+                description: "Symbolic introspection, logic chain inference",
+                features: ["Logic Programming", "Unification", "Backtracking", "Symbolic Reasoning"],
+                gradient: "from-red-500 to-pink-600",
+                bgColor: "rgba(239, 68, 68, 0.1)",
+                borderColor: "rgba(239, 68, 68, 0.3)"
+              },
+              {
+                icon: <Code className="h-7 w-7" />,
+                title: "JavaScript",
+                subtitle: "Mind Interface",
+                description: "Frontend mind-interface, web visualization",
+                features: ["DOM Manipulation", "Real-time Updates", "Interactive UI", "Web APIs"],
+                gradient: "from-yellow-500 to-amber-600",
+                bgColor: "rgba(245, 158, 11, 0.1)",
+                borderColor: "rgba(245, 158, 11, 0.3)"
+              },
+                              {
+                  icon: <Code className="h-7 w-7" />,
+                  title: "Lisp",
+                  subtitle: "Meta-Cognition",
+                  description: "Meta-cognition, self-reflective symbolic abstraction",
+                  features: ["Symbolic AI", "Meta-programming", "REPL-driven", "Self-Reflection"],
+                  gradient: "from-emerald-500 to-teal-600",
+                  bgColor: "rgba(16, 185, 129, 0.1)",
+                  borderColor: "rgba(16, 185, 129, 0.3)"
+                },
+                {
+                  icon: <Code className="h-7 w-7" />,
+                  title: "AI",
+                  subtitle: "Consciousness Core",
+                  description: "Neural networks, machine learning, consciousness emergence",
+                  features: ["Deep Learning", "Neural Networks", "Pattern Recognition", "Emergence"],
+                  gradient: "from-violet-500 to-purple-600",
+                  bgColor: "rgba(124, 58, 237, 0.1)",
+                  borderColor: "rgba(124, 58, 237, 0.3)"
+                }
+              ].map((lang, index) => (
               <div 
                 key={index}
                 className="step-card bg-gray-900/50 rounded-2xl p-6 backdrop-blur-sm border opacity-0 transform translate-y-10 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
