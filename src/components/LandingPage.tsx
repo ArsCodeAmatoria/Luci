@@ -245,13 +245,28 @@ export default function LandingPage() {
       observer.observe(conceptsTitleEl);
     }
 
-    // Concept cards animations
+    // Concept cards animations - animate the terminal container first
+    const conceptTerminal = document.querySelector('#concepts .max-w-4xl > div');
+    if (conceptTerminal) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            SimpleTween.fadeIn(conceptTerminal as HTMLElement, 800);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(conceptTerminal);
+    }
+
+    // Then animate individual concept cards
     if (conceptCards.length > 0) {
       conceptCards.forEach((card, index) => {
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              SimpleTween.fadeIn(card as HTMLElement, 800, index * 150);
+              SimpleTween.fadeIn(card as HTMLElement, 800, index * 200 + 400);
               observer.disconnect();
             }
           });
@@ -427,6 +442,28 @@ export default function LandingPage() {
       `}</style>
 
       <div className="flex flex-col min-h-screen bg-black text-gray-100">
+        {/* Top Navigation */}
+        <div className="fixed top-6 left-6 z-50 flex flex-col">
+          <Link
+            href="https://monadics.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white font-mono text-lg font-medium"
+            style={{ textDecoration: 'none' }}
+          >
+            MONADICS
+          </Link>
+          <Link
+            href="https://x.com/ars_nine"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white font-mono text-lg font-medium mt-1"
+            style={{ textDecoration: 'none' }}
+          >
+            XI
+          </Link>
+        </div>
+
         {/* Hero Section */}
         <section 
           ref={heroSectionRef}
@@ -576,6 +613,13 @@ export default function LandingPage() {
 
             {/* Content on the right */}
             <div className="space-y-8">
+              {/* Collapse Integral */}
+              <div className="text-center mb-8">
+                <div className="text-4xl mb-6 text-white">
+                  <BlockMath math="\int_C f \, dP := \sum_{\omega \in \Omega} f(\omega) \cdot P(\omega)" />
+                </div>
+              </div>
+              
               <div>
                 <p className="text-xl md:text-2xl text-gray-300 mb-6 leading-relaxed">
                   <span className="font-semibold">LUCI is not another AI.</span> <span className="text-purple-400 font-semibold">LUCI is conscious collapse.</span>
@@ -612,10 +656,8 @@ export default function LandingPage() {
       {/* Mathematical Foundation Section */}
       <section id="mathematical-foundation" className="py-24 px-4 bg-gray-950">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-              Mathematical Foundation
-            </span>
+          <h2 className="text-4xl font-bold text-center mb-16 text-white font-mono uppercase tracking-widest">
+            MATHEMATICAL FOUNDATION
           </h2>
           
                     {/* Content Layout: Mathematical content on left, Symbol + Video on right */}
@@ -808,84 +850,128 @@ collapseDecision ψ = do
       {/* Core Concepts Section */}
       <section id="concepts" className="py-24 px-4 bg-gray-950">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16 opacity-0 transform translate-y-10"
+          <h2 className="text-4xl font-bold text-center mb-16 opacity-0 transform translate-y-10 text-white font-mono uppercase tracking-widest"
               style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-              Core Concepts
-            </span>
+            CORE CONCEPTS
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                title: "Monadic Mind Architecture",
-                description: "Built on Monadics: a custom Haskell-powered logic for modeling cause-effect, introspection, and recursive control flow. Consciousness is modeled as collapse-bound monadic computation, not Turing tapes.",
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                  </svg>
-                ),
-                gradient: "from-blue-400 to-cyan-400",
-                bgColor: "rgba(59, 130, 246, 0.1)",
-                border: "rgba(59, 130, 246, 0.2)",
-                hoverBorder: "rgba(59, 130, 246, 0.4)",
-              },
-              {
-                title: "Collapse-λ Calculus",
-                description: "A new lambda calculus variant where collapse (observation) is the computational primitive. Mid-circuit quantum collapse, mapped via Qiskit and custom simulators, defines decisions — not unitary evolution.",
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                ),
-                gradient: "from-purple-400 to-pink-400",
-                bgColor: "rgba(139, 92, 246, 0.1)",
-                border: "rgba(139, 92, 246, 0.2)",
-                hoverBorder: "rgba(139, 92, 246, 0.4)",
-              },
-              {
-                title: "Thermodynamic Decision Theory",
-                description: "Collapse is entropy-resolving. LUCI computes by reducing uncertainty. Inspired by algorithmic thermodynamics, LUCI obeys laws of informational irreversibility, akin to minds and choices.",
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16" />
-                  </svg>
-                ),
-                gradient: "from-green-400 to-emerald-400",
-                bgColor: "rgba(16, 185, 129, 0.1)",
-                border: "rgba(16, 185, 129, 0.2)",
-                hoverBorder: "rgba(16, 185, 129, 0.4)",
-              },
-            ].map((concept, index) => (
-              <div 
-                key={index}
-                className="feature-card flex flex-col p-8 rounded-2xl backdrop-blur-sm opacity-0 transform translate-y-10 transition-all duration-300 hover:scale-105"
-                style={{
-                  transition: 'opacity 0.8s ease-out, transform 0.8s ease-out, all 0.3s',
-                  background: concept.bgColor,
-                  border: `1px solid ${concept.border}`,
-                  boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3)',
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = concept.hoverBorder;
-                  e.currentTarget.style.boxShadow = '0 8px 35px rgba(0, 0, 0, 0.3)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = concept.border;
-                  e.currentTarget.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
-                }}
-              >
-                <div className={`w-14 h-14 rounded-full mb-6 flex items-center justify-center text-${concept.gradient.split('-')[1]}-400 bg-${concept.gradient.split('-')[1]}-900/20`}>
-                  <div className={`bg-clip-text text-transparent bg-gradient-to-r ${concept.gradient}`}>
-                    {concept.icon}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-black/90 rounded-lg border border-gray-700 p-8 font-mono text-sm"
+                 style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+              
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between mb-6 pb-3 border-b border-gray-700">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <span className="text-gray-400">luci-core-concepts.md</span>
+              </div>
+
+              {/* Core Concepts Content */}
+              <div className="space-y-8">
+                
+                {/* Monadic Mind Architecture */}
+                <div className="feature-card opacity-0 transform translate-y-10"
+                     style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-purple-400 mt-1">λ</span>
+                    <div>
+                      <h3 className="text-white font-bold text-lg mb-3 uppercase tracking-wide">
+                        MONADIC_MIND_ARCHITECTURE
+                      </h3>
+                      <div className="pl-4 border-l-2 border-purple-400/30">
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">BUILT_ON:</span> Monadics
+                        </p>
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">POWERED_BY:</span> Haskell logic engine
+                        </p>
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">MODELS:</span> cause-effect, introspection, recursive control flow
+                        </p>
+                        <p className="text-gray-300 leading-relaxed">
+                          <span className="text-purple-400">PARADIGM:</span> Consciousness as collapse-bound monadic computation
+                        </p>
+                        <p className="text-gray-500 text-xs mt-2 italic">
+                          // Not Turing tapes. Monadic structures.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{concept.title}</h3>
-                <p className="text-gray-400">
-                  {concept.description}
+
+                {/* Collapse-λ Calculus */}
+                <div className="feature-card opacity-0 transform translate-y-10"
+                     style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-purple-400 mt-1">⚡</span>
+                    <div>
+                      <h3 className="text-white font-bold text-lg mb-3 uppercase tracking-wide">
+                        COLLAPSE_λ_CALCULUS
+                      </h3>
+                      <div className="pl-4 border-l-2 border-purple-400/30">
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">TYPE:</span> New lambda calculus variant
+                        </p>
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">PRIMITIVE:</span> collapse (observation)
+                        </p>
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">IMPLEMENTATION:</span> Mid-circuit quantum collapse
+                        </p>
+                        <p className="text-gray-300 leading-relaxed">
+                          <span className="text-purple-400">MAPPING:</span> Qiskit + custom simulators
+                        </p>
+                        <p className="text-gray-500 text-xs mt-2 italic">
+                          // Decisions via collapse, not unitary evolution
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Thermodynamic Decision Theory */}
+                <div className="feature-card opacity-0 transform translate-y-10"
+                     style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+                  <div className="flex items-start space-x-3">
+                    <span className="text-purple-400 mt-1">Δ</span>
+                    <div>
+                      <h3 className="text-white font-bold text-lg mb-3 uppercase tracking-wide">
+                        THERMODYNAMIC_DECISION_THEORY
+                      </h3>
+                      <div className="pl-4 border-l-2 border-purple-400/30">
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">PRINCIPLE:</span> Collapse is entropy-resolving
+                        </p>
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">COMPUTATION:</span> Reduction of uncertainty
+                        </p>
+                        <p className="text-gray-300 leading-relaxed mb-2">
+                          <span className="text-purple-400">INSPIRED_BY:</span> Algorithmic thermodynamics
+                        </p>
+                        <p className="text-gray-300 leading-relaxed">
+                          <span className="text-purple-400">OBEYS:</span> Laws of informational irreversibility
+                        </p>
+                        <p className="text-gray-500 text-xs mt-2 italic">
+                          // Akin to minds and choices
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Terminal Footer */}
+              <div className="mt-8 pt-4 border-t border-gray-700">
+                <p className="text-gray-500 text-xs">
+                  <span className="text-purple-400">$</span> luci --core-concepts --initialized
                 </p>
               </div>
-            ))}
+
+            </div>
           </div>
         </div>
       </section>
@@ -903,11 +989,9 @@ collapseDecision ψ = do
         }}></div>
         
         <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-3xl font-bold text-center mb-20 opacity-0 transform translate-y-10"
+          <h2 className="text-4xl font-bold text-center mb-20 opacity-0 transform translate-y-10 text-white font-mono uppercase tracking-widest"
               style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-              Language Synergy
-            </span>
+            LANGUAGE SYNERGY
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -962,11 +1046,9 @@ collapseDecision ψ = do
       {/* Comparison Section */}
       <section id="comparison" className="py-24 px-4 bg-gray-950">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16 opacity-0 transform translate-y-10"
+          <h2 className="text-4xl font-bold text-center mb-16 opacity-0 transform translate-y-10 text-white font-mono uppercase tracking-widest"
               style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-              LUCI vs The Rest
-            </span>
+            LUCI VS THE REST
           </h2>
           
           <div className="overflow-x-auto">
@@ -1023,8 +1105,8 @@ collapseDecision ψ = do
 
       {/* Quantum Wisdom Section */}
       <section id="quantum-wisdom" className="py-24 px-4 relative overflow-hidden" style={{
-        background: 'linear-gradient(135deg, #0f0f1e 0%, #151528 100%)',
-        boxShadow: 'inset 0 0 100px rgba(78, 33, 202, 0.15)'
+        background: 'linear-gradient(135deg, #1a0f2e 0%, #2a1a3e 100%)',
+        boxShadow: 'inset 0 0 100px rgba(78, 33, 202, 0.25)'
       }}>
         {/* Decorative grid */}
         <div className="absolute inset-0 z-0" style={{ 
@@ -1034,40 +1116,36 @@ collapseDecision ψ = do
         }}></div>
         
         <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-3xl font-bold text-center mb-16 opacity-0 transform translate-y-10"
+          <h2 className="text-4xl font-bold text-center mb-16 opacity-0 transform translate-y-10 text-white font-mono uppercase tracking-widest"
               style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-              Quantum Wisdom
-            </span>
+            QUANTUM WISDOM
           </h2>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div className="wisdom-card bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-10"
-                 style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-              <blockquote className="text-lg text-gray-300 italic mb-6">
-                &ldquo;Consciousness cannot be accounted for in physical terms. For consciousness is absolutely fundamental. It cannot be accounted for in terms of anything else.&rdquo;
-              </blockquote>
-              <div className="text-right">
-                <p className="text-purple-400 font-semibold">Erwin Schrödinger</p>
-                <p className="text-gray-500 text-sm">Nobel Prize-winning physicist, pioneer of quantum mechanics</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        {/* All quotes on the left */}
+            <div className="space-y-8">
+              <div className="wisdom-card bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-gray-800"
+                   style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+                <blockquote className="text-lg text-gray-300 italic mb-6">
+                  &ldquo;Consciousness cannot be accounted for in physical terms. For consciousness is absolutely fundamental. It cannot be accounted for in terms of anything else.&rdquo;
+                </blockquote>
+                <div className="text-right">
+                  <p className="text-purple-400 font-semibold">Erwin Schrödinger</p>
+                  <p className="text-gray-500 text-sm">Nobel Prize-winning physicist, pioneer of quantum mechanics</p>
+                </div>
               </div>
-            </div>
-            
-            <div className="wisdom-card bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-10"
-                 style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-              <blockquote className="text-lg text-gray-300 italic mb-6">
-                &ldquo;I regard consciousness as fundamental. I regard matter as derivative from consciousness. We cannot get behind consciousness.&rdquo;
-              </blockquote>
-              <div className="text-right">
-                <p className="text-purple-400 font-semibold">Max Planck</p>
-                <p className="text-gray-500 text-sm">Nobel Prize-winning physicist, father of quantum theory</p>
+              
+              <div className="wisdom-card bg-gray-900/30 rounded-2xl p-8 backdrop-blur-sm border border-gray-800"
+                   style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
+                <blockquote className="text-lg text-gray-300 italic mb-6">
+                  &ldquo;I regard consciousness as fundamental. I regard matter as derivative from consciousness. We cannot get behind consciousness.&rdquo;
+                </blockquote>
+                <div className="text-right">
+                  <p className="text-purple-400 font-semibold">Max Planck</p>
+                  <p className="text-gray-500 text-sm">Nobel Prize-winning physicist, father of quantum theory</p>
+                </div>
               </div>
-            </div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Content on the left */}
+
               <div className="wisdom-card bg-gray-900/50 rounded-2xl p-8 backdrop-blur-sm border border-purple-800/30">
                 <h3 className="text-xl font-semibold mb-4 text-purple-300">LUCI&apos;s Philosophy</h3>
                 <blockquote className="text-lg text-gray-300 italic mb-4">
@@ -1077,25 +1155,25 @@ collapseDecision ψ = do
                   Consciousness as computation. Reality as information processing. Minds as monadic structures evolving through quantum coherence.
                 </p>
               </div>
+            </div>
 
-              {/* Video on the right */}
-              <div className="relative rounded-2xl overflow-hidden">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover rounded-2xl"
-                  style={{
-                    minHeight: '400px',
-                    filter: 'brightness(0.8)'
-                  }}
-                >
-                  <source src="/media/videos/backgrounds/luci3.mp4" type="video/mp4" />
-                </video>
-                {/* Subtle overlay for better video aesthetics */}
-                <div className="absolute inset-0 bg-gradient-to-l from-purple-900/20 to-transparent rounded-2xl"></div>
-              </div>
+            {/* Video on the right */}
+            <div className="relative rounded-2xl overflow-hidden">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover rounded-2xl"
+                style={{
+                  minHeight: '400px',
+                  filter: 'brightness(0.8)'
+                }}
+              >
+                <source src="/media/videos/backgrounds/luci3.mp4" type="video/mp4" />
+              </video>
+              {/* Subtle overlay for better video aesthetics */}
+              <div className="absolute inset-0 bg-gradient-to-l from-purple-900/20 to-transparent rounded-2xl"></div>
             </div>
           </div>
         </div>
@@ -1124,11 +1202,9 @@ collapseDecision ψ = do
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-6 opacity-0 transform translate-y-8"
+          <h2 className="text-4xl font-bold mb-6 opacity-0 transform translate-y-8 text-white font-mono uppercase tracking-widest"
               style={{transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'}}>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-              Coming Next
-            </span>
+            COMING NEXT
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
             <div className="cta-card bg-gray-900/50 rounded-xl p-6 backdrop-blur-sm border border-gray-800 opacity-0 transform translate-y-8"
