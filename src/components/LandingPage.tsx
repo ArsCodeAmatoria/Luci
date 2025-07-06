@@ -58,8 +58,6 @@ export default function LandingPage() {
   // References for animated elements
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const heroSubtitleRef = useRef<HTMLHeadingElement>(null);
-  const heroTextRef = useRef<HTMLDivElement>(null);
-  const buttonContainerRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
   
   // State for randomly generated elements to avoid hydration mismatch
