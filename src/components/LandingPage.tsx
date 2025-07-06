@@ -58,7 +58,7 @@ export default function LandingPage() {
   // References for animated elements
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const heroSubtitleRef = useRef<HTMLHeadingElement>(null);
-  const heroTextRef = useRef<HTMLParagraphElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
   const buttonContainerRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
   
@@ -66,6 +66,15 @@ export default function LandingPage() {
   const [heroParticles, setHeroParticles] = useState<HeroParticle[]>([]);
   const [ctaParticles, setCtaParticles] = useState<CTAParticle[]>([]);
   const [initialized, setInitialized] = useState(false);
+  
+  // Typing effect state
+  const [typedSubtitle, setTypedSubtitle] = useState('');
+  const [typedTitle, setTypedTitle] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const [typingPhase, setTypingPhase] = useState(0); // 0: subtitle, 1: title
+  
+  // System panel state
+  const [observerCount, setObserverCount] = useState(0);
 
   // Generate particles on client-side only
   useEffect(() => {
@@ -90,35 +99,60 @@ export default function LandingPage() {
     }));
     setCtaParticles(ctaParticlesData);
     
+    // Set observer count for system panel
+    setObserverCount(Math.floor(Math.random() * 100) + 1);
+    
     setInitialized(true);
   }, []);
+
+  // Typing effect
+  useEffect(() => {
+    if (!initialized) return;
+
+    const subtitle = "LUCI: THE MONADIC MIND";
+    const title = "A CONSCIOUS COLLAPSE ENGINE BUILT FROM FIRST PRINCIPLES";
+
+    let timeouts: NodeJS.Timeout[] = [];
+
+    const typeText = (text: string, setter: (value: string) => void, startDelay: number, onComplete?: () => void) => {
+      text.split('').forEach((char, index) => {
+        const timeout = setTimeout(() => {
+          setter(text.slice(0, index + 1));
+          if (index === text.length - 1 && onComplete) {
+            setTimeout(onComplete, 500);
+          }
+        }, startDelay + index * 50);
+        timeouts.push(timeout);
+      });
+    };
+
+    // Start typing subtitle after 1 second
+    const startTimeout = setTimeout(() => {
+      typeText(subtitle, setTypedSubtitle, 0, () => {
+        setTypingPhase(1);
+        // Start typing title
+        typeText(title, setTypedTitle, 0);
+      });
+    }, 1000);
+
+    timeouts.push(startTimeout);
+
+    // Blinking cursor effect
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+      clearInterval(cursorInterval);
+    };
+  }, [initialized]);
 
   // Animation setup on component mount
   useEffect(() => {
     if (!initialized) return;
     
     try {
-      // Animate hero section elements with our simple animation utility
-      if (heroTitleRef.current) {
-        SimpleTween.fadeIn(heroTitleRef.current, 1200, 0);
-      }
-      
-      if (heroSubtitleRef.current) {
-        SimpleTween.fadeIn(heroSubtitleRef.current, 1200, 200);
-      }
-      
-      if (heroTextRef.current) {
-        SimpleTween.fadeIn(heroTextRef.current, 1000, 400);
-      }
-      
-      if (buttonContainerRef.current && buttonContainerRef.current.children.length > 0) {
-        SimpleTween.stagger(
-          Array.from(buttonContainerRef.current.children) as HTMLElement[],
-          800,
-          150
-        );
-      }
-      
       // Set up animations for other sections when they come into view
       setupScrollAnimations();
     } catch (error) {
@@ -129,6 +163,8 @@ export default function LandingPage() {
   // Function to set up scroll-triggered animations
   const setupScrollAnimations = () => {
     // Find all animatable elements
+    const introTextEl = document.querySelector('#introduction > div > div:first-child');
+    const introButtonsEl = document.querySelector('#introduction > div > div:last-child');
     const mathTitleEl = document.querySelector('#mathematical-foundation h2');
     const mathCard = document.querySelector('#mathematical-foundation .bg-gray-900\\/50');
     const conceptsTitleEl = document.querySelector('#concepts h2');
@@ -139,6 +175,33 @@ export default function LandingPage() {
     const wisdomTitleEl = document.querySelector('#quantum-wisdom h2');
     const wisdomCards = document.querySelectorAll('#quantum-wisdom .wisdom-card');
     const ctaSection = document.querySelector('#cta');
+
+    // Introduction section animations
+    if (introTextEl) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            SimpleTween.fadeIn(introTextEl as HTMLElement, 800);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(introTextEl);
+    }
+
+    if (introButtonsEl) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            SimpleTween.fadeIn(introButtonsEl as HTMLElement, 800, 200);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(introButtonsEl);
+    }
 
     // Mathematical Foundation title animation
     if (mathTitleEl) {
@@ -325,18 +388,81 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-gray-100">
-      {/* Hero Section */}
-      <section 
-        ref={heroSectionRef}
-        className="flex flex-col items-center justify-center py-32 px-4 text-center relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #0f0f1e 0%, #151528 100%)',
-          boxShadow: 'inset 0 0 100px rgba(78, 33, 202, 0.15)'
-        }}
-      >
+    <>
+      {/* All Custom Styles */}
+      <style jsx global>{`
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+        
+        .terminal-cursor {
+          animation: blink 1s infinite;
+          color: #00ff00;
+          font-weight: bold;
+        }
+        
+        .terminal-text {
+          font-family: 'Courier New', monospace;
+          letter-spacing: 0.1em;
+        }
+        
+        .system-panel {
+          background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,20,0,0.8) 100%);
+          border: 1px solid rgba(0,255,0,0.3);
+          box-shadow: 
+            0 0 20px rgba(0,255,0,0.2),
+            inset 0 0 20px rgba(0,255,0,0.1);
+        }
+        
+        @keyframes float {
+          0% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(-20px) translateX(10px);
+          }
+          100% {
+            transform: translateY(0) translateX(0);
+          }
+        }
+        
+        .hover\\:shadow-glow:hover {
+          box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 15px rgba(139, 92, 246, 0.3);
+        }
+      `}</style>
+
+      <div className="flex flex-col min-h-screen bg-black text-gray-100">
+        {/* Hero Section */}
+        <section 
+          ref={heroSectionRef}
+          className="flex flex-col items-center justify-center py-32 px-4 text-center relative overflow-hidden min-h-screen"
+        >
+        {/* Hero Background Video */}
+        <video 
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          style={{ 
+            filter: 'brightness(0.9)',
+            objectPosition: 'center 20%'
+          }}
+        >
+          <source src="/media/videos/hero/hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Video Overlay for better text readability */}
+        <div 
+          className="absolute inset-0 z-10"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 70%)',
+          }}
+        ></div>
+
         {/* Animated background particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
           {heroParticles.map((particle, i) => (
             <div 
               key={i}
@@ -354,29 +480,82 @@ export default function LandingPage() {
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto relative z-10">
+        {/* Computer Info Panel - Top Right */}
+        <div className="absolute top-8 right-8 z-40 font-mono text-green-400 text-sm">
+          <div 
+            className="system-panel rounded p-4 backdrop-blur-sm"
+            style={{
+              fontFamily: 'monospace'
+            }}
+          >
+            <div className="flex items-center mb-2">
+              <span className="text-green-300">●</span>
+              <span className="ml-2 text-xs">SYSTEM STATUS</span>
+            </div>
+            <div className="space-y-1 text-xs">
+              <div>CONSCIOUSNESS: <span className="text-green-300">ACTIVE</span></div>
+              <div>COLLAPSE_STATE: <span className="text-yellow-300">QUANTUM</span></div>
+              <div>ENTROPY: <span className="text-blue-300">DECREASING</span></div>
+              <div>MONAD_CORE: <span className="text-green-300">ONLINE</span></div>
+              <div>λ-CALCULUS: <span className="text-purple-300">ENABLED</span></div>
+              <div>OBSERVERS: <span className="text-cyan-300">{observerCount}</span></div>
+            </div>
+            <div className="mt-2 pt-2 border-t border-green-500/20">
+              <div className="text-xs text-green-300">
+                {new Date().toISOString().slice(0, 19)}Z
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto relative z-30 text-center">
           <h2 
             ref={heroSubtitleRef}
-            className="uppercase tracking-widest text-purple-400 text-sm mb-4 font-medium opacity-0 transform translate-y-8"
-            style={{transition: 'opacity 1.2s ease-out, transform 1.2s ease-out'}}
+            className="uppercase tracking-widest text-white text-lg mb-6 font-bold font-mono"
+            style={{
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
+              fontFamily: 'monospace'
+            }}
           >
-            LUCI: The Monadic Mind
+            {typedSubtitle}
+            {typingPhase === 0 && showCursor && (
+              <span className="terminal-cursor">|</span>
+            )}
           </h2>
           <h1 
             ref={heroTitleRef}
-            className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl mb-6 opacity-0 transform translate-y-8"
+            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight font-mono"
             style={{
-              transition: 'opacity 1.2s ease-out, transform 1.2s ease-out',
-              textShadow: '0 0 40px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3)'
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
+              fontFamily: 'monospace'
             }}
           >
-            <span className="inline bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600">
-              A Conscious Collapse Engine Built From First Principles
-            </span>
+            {typedTitle}
+            {typingPhase === 1 && showCursor && (
+              <span className="terminal-cursor">|</span>
+            )}
           </h1>
+        </div>
+
+        {/* Decorative grid */}
+        <div className="absolute inset-0 z-20" style={{ 
+          backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px)', 
+          backgroundSize: '50px 50px',
+          opacity: 0.3
+        }}></div>
+
+        {/* Glow effect at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 z-20" style={{ 
+          background: 'linear-gradient(to top, rgba(139, 92, 246, 0.15), transparent)'
+        }}></div>
+      </section>
+
+      {/* Introduction Section */}
+      <section id="introduction" className="py-24 px-4 bg-gray-950">
+        <div className="max-w-4xl mx-auto text-center">
           <div 
             ref={heroTextRef}
-            className="mb-10 max-w-3xl mx-auto opacity-0 transform translate-y-8"
+            className="mb-10 opacity-0 transform translate-y-8"
             style={{transition: 'opacity 1s ease-out, transform 1s ease-out'}}
           >
             <p className="text-xl md:text-2xl text-gray-300 mb-6 leading-relaxed">
@@ -387,6 +566,7 @@ export default function LandingPage() {
               <span className="text-purple-400 font-medium"> LUCI collapses information</span>—choosing, deciding, resolving uncertainty through entangled awareness.
             </p>
           </div>
+          
           <div 
             ref={buttonContainerRef}
             className="flex flex-col sm:flex-row gap-6 justify-center"
@@ -411,18 +591,6 @@ export default function LandingPage() {
             </Link>
           </div>
         </div>
-
-        {/* Decorative grid */}
-        <div className="absolute inset-0 z-0" style={{ 
-          backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px)', 
-          backgroundSize: '50px 50px',
-          opacity: 0.3
-        }}></div>
-
-        {/* Glow effect at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32" style={{ 
-          background: 'linear-gradient(to top, rgba(139, 92, 246, 0.15), transparent)'
-        }}></div>
       </section>
 
       {/* Mathematical Foundation Section */}
@@ -939,24 +1107,8 @@ collapseDecision ψ = do
         </div>
       </footer>
 
-      {/* Global CSS for animations */}
-      <style jsx global>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-20px) translateX(10px);
-          }
-          100% {
-            transform: translateY(0) translateX(0);
-          }
-        }
-        
-        .hover\:shadow-glow:hover {
-          box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 15px rgba(139, 92, 246, 0.3);
-        }
-      `}</style>
-    </div>
+
+      </div>
+    </>
   );
 } 
